@@ -3,6 +3,7 @@ from tkinter import messagebox, ttk
 
 from treeview import TreeviewData
 from vessel_database import get_data_from_db
+from scrape_data import ScrapeMarineTraffic
 
 # CONSTANTS
 DB_PATH = r"db\vessel_info.db"
@@ -103,6 +104,12 @@ def populate_treeview(data):
 def save_and_exit():
     root.destroy()
 
+def delete_row():
+    pass
+
+def import_data():
+    pass
+
 # Add label and entry field
 search_entry = ttk.Entry(pane_1)
 search_entry.insert(0, "Filter vessel by name")
@@ -123,8 +130,15 @@ treeview = TreeviewData(treeFrame, selectmode=tk.EXTENDED, yscrollcommand=treeSc
 treeview.pack(expand=True, fill=tk.BOTH)
 treeScroll.config(command=treeview.yview)
 
-save_and_exit_button = ttk.Button(pane_1, text="Save & Exit", style="Accent.TButton", command=save_and_exit)
-save_and_exit_button.pack(side=tk.BOTTOM, fill=tk.Y, pady=5)
+bottom_frame = ttk.Frame(pane_1)
+bottom_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+
+delete_row_button = ttk.Button(bottom_frame, text="Delete", style="Accent.TButton", command=save_and_exit)
+delete_row_button.grid(row=0, column=0, padx=80, pady=(5, 5), sticky="ew")
+
+exit_button = ttk.Button(bottom_frame, text="Exit", style="Accent.TButton", command=save_and_exit)
+exit_button.grid(row=0, column=1, padx=100, pady=(5, 5), sticky="ew")
+
 
 # Treeview columns
 treeview.column("#0", width=250)

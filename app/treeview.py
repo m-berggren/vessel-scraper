@@ -9,7 +9,6 @@ class TreeviewData(ttk.Treeview):
         super().__init__(master, **kwargs)
 
         self.bind("<Double-1>", self.on_double_click)
-        self.edited_column = ""
 
     def on_double_click(self, event):
         region_clicked = self.identify_region(event.x, event.y)
@@ -18,7 +17,6 @@ class TreeviewData(ttk.Treeview):
             return
 
         column = self.identify_column(event.x)
-        self.edited_column = column
         column_index = int(column[1:]) - 1
 
         selected_iid = self.focus()
@@ -78,17 +76,10 @@ class TreeviewData(ttk.Treeview):
             ]
         
         event.widget.destroy()
-        
         update_data_to_db(updated_db_list)
-    
-        
-        
-
-        
-
-        
-
-
 
     def on_focus_out(self, event):
         event.widget.destroy()
+
+    def delete_row_data(self):
+        pass
