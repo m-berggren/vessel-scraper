@@ -39,7 +39,7 @@ vessel_name_entry.insert(0, "")
 vessel_name_entry.grid(row=2, column=0, padx=5, pady=(0, 10), sticky="ew")
 
 # Add option from marine traffic
-import_button = ttk.Button(widgets_frame, text="Import data", style="Accent.TButton")
+import_button = ttk.Button(widgets_frame, text="Import data", style="Accent.TButton", )
 import_button.grid(row=3, column=0, padx=5, pady=(0, 10), sticky="ew")
 
 
@@ -101,7 +101,7 @@ def populate_treeview(data):
     for item in data:
         treeview.insert("", index=tk.END, text=item[1], values=(item[2], item[0], item[3]))
 
-def save_and_exit():
+def exit_application():
     root.destroy()
 
 def delete_row():
@@ -133,10 +133,10 @@ treeScroll.config(command=treeview.yview)
 bottom_frame = ttk.Frame(pane_1)
 bottom_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
-delete_row_button = ttk.Button(bottom_frame, text="Delete", style="Accent.TButton", command=save_and_exit)
+delete_row_button = ttk.Button(bottom_frame, text="Delete", style="Accent.TButton", command=delete_row)
 delete_row_button.grid(row=0, column=0, padx=80, pady=(5, 5), sticky="ew")
 
-exit_button = ttk.Button(bottom_frame, text="Exit", style="Accent.TButton", command=save_and_exit)
+exit_button = ttk.Button(bottom_frame, text="Exit", style="Accent.TButton", command=exit_application)
 exit_button.grid(row=0, column=1, padx=100, pady=(5, 5), sticky="ew")
 
 
