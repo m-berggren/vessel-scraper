@@ -1,7 +1,7 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import messagebox, ttk
 
-from vessel_database import update_data_to_db
+from app.vessel_database import update_data_to_db
 
 
 class TreeviewData(ttk.Treeview):
@@ -81,5 +81,13 @@ class TreeviewData(ttk.Treeview):
     def on_focus_out(self, event):
         event.widget.destroy()
 
-    def delete_row_data(self):
-        pass
+    def remove_row_data(self):
+        row_iids = self.selection()
+        selected_items_by_imo = list()
+
+        for row in row_iids:
+            selected_items_by_imo.append(self.item(row).get('values')[1])
+
+        return selected_items_by_imo
+        
+    
