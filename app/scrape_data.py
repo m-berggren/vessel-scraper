@@ -4,9 +4,9 @@ import requests
 
 class ScrapeMarineTraffic:
     def __init__(self, imo):
-        self.response = get_ship_info(imo)
+        self.response = self.get_ship_info(imo)
 
-def get_ship_info(imo):
+    def get_ship_info(self, imo):
 
         url = f"https://www.marinetraffic.com/en/ais/details/ships/imo:{imo}"
 
@@ -26,13 +26,14 @@ def get_ship_info(imo):
 
         return response.content
 
-def get_response_data(self):
-    data = self.response
+    @staticmethod
+    def get_response_data(self):
+        data = self.response
 
-    if not data:
-        return
-     
-    return json.loads(data.decode("utf-8"))
+        if not data:
+            return
+        
+        return json.loads(data.decode("utf-8"))
 
 
 

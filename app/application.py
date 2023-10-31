@@ -4,6 +4,7 @@ from tkinter import messagebox, ttk
 from treeview import TreeviewData
 from vessel_database import get_data_from_db
 from scrape_data import ScrapeMarineTraffic
+from selenium_chrome import get_imo_from_google_chrome
 
 # CONSTANTS
 DB_PATH = r"db\vessel_info.db"
@@ -38,10 +39,16 @@ vessel_name_entry = ttk.Entry(widgets_frame)
 vessel_name_entry.insert(0, "")
 vessel_name_entry.grid(row=2, column=0, padx=5, pady=(0, 10), sticky="ew")
 
-# Add option from marine traffic
-import_button = ttk.Button(widgets_frame, text="Import data", style="Accent.TButton", )
-import_button.grid(row=3, column=0, padx=5, pady=(0, 10), sticky="ew")
+def import_data():
+    vessel_name = vessel_name_entry.get()
+    imo = get_imo_from_google_chrome(vessel_name)
+    print(ScrapeMarineTraffic(imo).get_response_data())
+    #return ScrapeMarineTraffic(imo).get_response_data()
+    
 
+# Add option from marine traffic
+import_button = ttk.Button(widgets_frame, text="Import data", style="Accent.TButton", command=import_data)
+import_button.grid(row=3, column=0, padx=5, pady=(0, 10), sticky="ew")
 
 # Imo box
 callsign_label = ttk.Label(widgets_frame, text="Callsign", font=("Arial", 10, "bold"), padding=(0, 0, 0, 0))
@@ -107,8 +114,7 @@ def exit_application():
 def delete_row():
     pass
 
-def import_data():
-    pass
+
 
 # Add label and entry field
 search_entry = ttk.Entry(pane_1)
