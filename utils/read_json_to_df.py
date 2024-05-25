@@ -6,4 +6,4 @@ VESSEL_JSON = r".\utils\vessel_info.json"
 df = pd.read_json(VESSEL_JSON)
 
 df = df.drop(index=2814)
-df.to_csv("test_file2.csv")
+df.to_csv("vessel_file.csv")
